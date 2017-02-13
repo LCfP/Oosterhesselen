@@ -1,5 +1,5 @@
 # Jetbrains IDEs
-/.idea
+*/.idea
 
 # Windows image file caches
 Thumbs.db
