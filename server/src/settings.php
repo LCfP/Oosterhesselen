@@ -10,5 +10,14 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        // PDO connection
+        'db' => [
+            'host' => 'localhost',
+            'port' => 3306,
+            'dbname' => 'oosterhesselen',
+            'user' => 'root',
+            'pass' => ''
+        ]
     ],
 ];
