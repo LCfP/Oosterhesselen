@@ -12,11 +12,7 @@ $container['logger'] = function ($c) {
 };
 
 $container['view'] = function ($c) {
-    $view = new \Slim\Views\Twig('templates', [
-        'cache' => 'cache'
-    ]);
-
-    return $view;
+    return new \Slim\Views\PhpRenderer('templates/');
 };
 
 // Service factory for the ORM

@@ -51,5 +51,4 @@ Temporary Items
 /vendor/
 /logs/*
 composer.phar
-/public/cache/*
 bundle.js
