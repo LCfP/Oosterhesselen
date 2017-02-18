@@ -49,5 +49,4 @@ Temporary Items
 # Misc.
 /vendor/
 /logs/*
-composer.lock
 composer.phar

@@ -34,6 +34,15 @@ class PersonController
 
     public function getPersons(Request $request, Response $response, $args)
     {
-        // TODO
+        $this->logger->info("'/person/{$args['pagination']}/{$args['amount']}' | ");
+
+        $persons = $this->table->simplePaginate(
+            (int) $args['amount'],
+            ['*'],
+            'page',
+            (int) $args['pagination']
+        );
+
+        return $response->withJson($persons ?: "");
     }
 }
