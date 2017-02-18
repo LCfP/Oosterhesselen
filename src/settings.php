@@ -11,13 +11,16 @@ return [
             'level' => \Monolog\Logger::DEBUG,
         ],
 
-        // PDO connection
+        // Eloquent connection
         'db' => [
+            'driver' => 'mysqli',
             'host' => 'localhost',
-            'port' => 3306,
-            'dbname' => 'oosterhesselen',
-            'user' => 'root',
-            'pass' => ''
+            'database' => 'oosterhesselen',
+            'username' => 'root',
+            'password' => '',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
         ]
     ],
 ];
