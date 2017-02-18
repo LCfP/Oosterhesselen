@@ -21,6 +21,8 @@ class PersonController
 
     public function getPerson(Request $request, Response $response, $args)
     {
+        $this->logger->info("'/person/{$args['id']}' | ");
+
         if (!strpos($args['id'], '.')) { // will never be zero.
             $person = $this->table->find((int) $args['id']);
         } else {
