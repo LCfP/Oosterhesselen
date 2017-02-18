@@ -18,9 +18,9 @@ return [
             'database' => 'oosterhesselen',
             'username' => 'root',
             'password' => '',
-            'charset'   => 'utf8',
+            'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'prefix' => '',
         ]
     ],
 ];
