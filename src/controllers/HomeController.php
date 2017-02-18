@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Slim\Views\Twig;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,8 +12,9 @@ class HomeController
 {
     private $logger;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(Twig $view, LoggerInterface $logger)
     {
+        $this->view = $view;
         $this->logger = $logger;
     }
 
@@ -20,6 +22,8 @@ class HomeController
     {
         $this->logger->info("'/' | ");
 
-        // TODO
+        return $this->view->render($response, 'index.html', [
+
+        ]);
     }
 }

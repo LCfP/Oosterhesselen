@@ -47,6 +47,9 @@ Temporary Items
 .apdisk
 
 # Misc.
+/node_modules
 /vendor/
 /logs/*
 composer.phar
+/public/cache/*
+bundle.js
