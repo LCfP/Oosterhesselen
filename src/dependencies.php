@@ -21,3 +21,11 @@ $container['db'] = function ($c) {
 
     return $capsule;
 };
+
+// This inits the PersonController, to be exposed via /person/<options> in routes.php
+$container[\App\Controllers\PersonController::class] = function ($c) {
+    $logger = $c->get('logger');
+    $table = $c->get('db')->table('personen');
+
+    return new \App\Controllers\PersonController($logger, $table);
+};

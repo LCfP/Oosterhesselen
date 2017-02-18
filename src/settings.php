@@ -13,7 +13,7 @@ return [
 
         // Eloquent connection
         'db' => [
-            'driver' => 'mysqli',
+            'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'oosterhesselen',
             'username' => 'root',
