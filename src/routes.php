@@ -1,9 +1,10 @@
 <?php
 
-// retrieves full data for a person with ID {id}.
-$app->get('/person/{id}', function ($request, $response, $args) {
-    $this->logger->info("'/person/" . $args['id'] . "'");
+$app->group('/person', function ()
+{
+    // retrieves full data for a person with ID {id}.
+    $this->get('/{pagination}/{amount}', \App\Controllers\PersonController::class . ':getPersons');
 
-    echo $args['id'];
+    // retrieves full data for a person with ID {id}.
+    $this->get('/{id}', \App\Controllers\PersonController::class . ':getPerson');
 });
-
