@@ -22,7 +22,14 @@ $container['db'] = function ($c) {
     return $capsule;
 };
 
-// This inits the PersonController, to be exposed via /person/<options> in routes.php
+// This inits the HomeController, to be exposed via '/' in routes.php
+$container[\App\Controllers\HomeController::class] = function ($c) {
+    $logger = $c->get('logger');
+
+    return new \App\Controllers\HomeController($logger);
+};
+
+// This inits the PersonController, to be exposed via '/person/<options>' in routes.php
 $container[\App\Controllers\PersonController::class] = function ($c) {
     $logger = $c->get('logger');
     $table = $c->get('db')->table('personen');
