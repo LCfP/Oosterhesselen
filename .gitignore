@@ -51,4 +51,7 @@ Temporary Items
 /vendor/
 /logs/*
 composer.phar
+
+# Compiled files
 bundle.js
+styles.css

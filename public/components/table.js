@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import FixedDataTable from 'fixed-data-table';
 import Axios from 'axios';
 
+require("../styles/fixed-data-table.min.css");
+
+
 const {Table, Column, Cell} = FixedDataTable;
 
 const TextCell = ({rowIndex, data, col}) => (
