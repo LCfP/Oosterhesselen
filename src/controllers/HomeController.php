@@ -23,8 +23,6 @@ class HomeController
     {
         $this->logger->info("'/' | ");
 
-        return $this->view->render($response, 'index.html', [
-
-        ]);
+        return $this->view->render($response, 'index.html');
     }
 }

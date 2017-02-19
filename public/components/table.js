@@ -40,6 +40,7 @@ class TableComponent extends React.Component
         Axios.get(`./person/${this.state.pagination}/${this.state.perPage}`).then(
             res => {
                 const data = res.data;
+
                 this.setState((prevState, props) => {
                     return {
                         hasNext: Boolean(data['next_page_url']),
