@@ -1,5 +1,5 @@
 import Component from '../component';
-import Template from "../../../templates/table/table.hbs";
+import Template from "../../../templates/body/table/table.hbs";
 import "../../styles/table.css";
 
 
@@ -11,6 +11,7 @@ class Table extends Component
     constructor(props={}, state={})
     {
         props.template = Template;
+
         super(props, state);
     }
 }

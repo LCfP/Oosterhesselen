@@ -11,6 +11,7 @@ class Topbar extends Component
     constructor(props={}, state={})
     {
         props.template = Template;
+
         super(props, state);
     }
 }

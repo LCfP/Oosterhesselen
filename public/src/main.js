@@ -1,9 +1,8 @@
 import "./vendor/js/bootstrap";
-import Topbar from './components/nav/topbar';
-
 import "./vendor/css/bootstrap.css";
 
+import ComponentBuilder from './components/componentbuilder';
 
-new Topbar(
-    {anchor: "#document"}
-);
+
+const builder = new ComponentBuilder();
+builder.build();

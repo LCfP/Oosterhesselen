@@ -11,8 +11,8 @@ class Component
     constructor(props={}, state={})
     {
         this.props = this._set(props);
-
         this._setState(state);
+
         this.mount();
     }
 
@@ -21,29 +21,34 @@ class Component
         // registers events etc. (to be overridden)
     }
 
-    render(options={})
+    render()
     {
-        options.renderType = options.renderType ? options.renderType : "replace";
-
         if (!(this.props.template && this.props.anchor)) {
             throw "Cannot render Component, since it has not specified a template, nor an achor!";
         }
 
+        const renderType = this.props.options && this.props.options.renderType
+            ? this.props.options.renderType : "replace";
         const compiled = this.props.template(this.state);
         const $anchor = $(this.props.anchor);
+
         const cases = {
-            "append": $anchor.append,
-            "prepend": $anchor.prepend,
-            "replace": $anchor.html
+            "append": $anchor.append.bind($anchor),
+            "prepend": $anchor.prepend.bind($anchor),
+            "replace": $anchor.html.bind($anchor)
         };
 
-        cases[options.renderType](compiled);
+        //$anchor.html(compiled);
+        cases[renderType](compiled);
     }
 
-    _setState(state)
+    _setState(stateProvider)
     {
-        this.state = this._set(state);
-        this.render()
+        const updatedState = typeof stateProvider === 'function'
+            ? stateProvider(this.state) : stateProvider;
+
+        this.state = this._set(updatedState);
+        this.render();
     }
 
     _set(values, target={})
