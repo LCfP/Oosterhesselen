@@ -1,5 +1,6 @@
 import Component from '../component';
 import Template from "../../../templates/body/table/table.hbs";
+
 import "../../styles/table.css";
 
 
@@ -76,7 +77,7 @@ class Table extends Component
                     rows: (prevState.rows || []).concat(data.data),
                     pagination: pagination
                 }
-            })
+            });
         });
     }
 }
