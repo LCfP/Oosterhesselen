@@ -1,0 +1,12 @@
+.margin-bottom-zero {
+    margin-bottom: 0;
+}
+
+.table-wrapper {
+    max-height: 66vh;
+    overflow: auto;
+}
+
+.normalize-overflow {
+    padding-right: 17px;
+}

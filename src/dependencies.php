@@ -11,6 +11,10 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+$container['view'] = function ($c) {
+    return new \Slim\Views\PhpRenderer('templates/');
+};
+
 // Service factory for the ORM
 $container['db'] = function ($c) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
@@ -22,7 +26,15 @@ $container['db'] = function ($c) {
     return $capsule;
 };
 
-// This inits the PersonController, to be exposed via /person/<options> in routes.php
+// This inits the HomeController, to be exposed via '/' in routes.php
+$container[\App\Controllers\HomeController::class] = function ($c) {
+    $view = $c->get('view');
+    $logger = $c->get('logger');
+
+    return new \App\Controllers\HomeController($view, $logger);
+};
+
+// This inits the PersonController, to be exposed via '/person/<options>' in routes.php
 $container[\App\Controllers\PersonController::class] = function ($c) {
     $logger = $c->get('logger');
     $table = $c->get('db')->table('personen');

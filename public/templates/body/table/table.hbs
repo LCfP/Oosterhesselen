@@ -1,0 +1,62 @@
+<div class="hidden-md hidden-lg">
+    <div class="alert alert-warning">
+        Deze pagina valt beter te bestuderen op grotere schermen!
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        Personen
+        <div class="form-group form-inline pull-right margin-bottom-zero">
+            <label for="pagination_select">Toon per keer:</label>
+            <select title="pagination" id="pagination_select" class="form-control">
+                {{#each pagination.options}}
+                    <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>
+                        {{this.value}}
+                    </option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-responsive margin-bottom-zero">
+            <thead class="normalize-overflow">
+                <tr>
+                    {{#each headers as |value index|}}
+                        <th>{{value}}</th>
+                    {{/each}}
+                </tr>
+            </thead>
+        </table>
+        <div class="table-wrapper">
+            <table class="table table-responsive">
+                <tbody>
+                    {{#each rows as |child index|}}
+                        <tr>
+                            {{#each child as |value key|}}
+                                <td>{{value}}</td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+                {{#if pagination.hasNextPage}}
+                    <tfoot>
+                        <tr>
+                            <td colspan="{{headers.length}}" class="text-center">
+                                <button class="btn btn-default" id="load-more">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                    Laad meer
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                {{/if}}
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer clearfix">
+        <button class="btn btn-default pull-right">
+            <i class="glyphicon glyphicon-download-alt"></i>
+            Download CSV
+        </button>
+    </div>
+</div>
