@@ -1,6 +1,8 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
 const webpack = require('webpack');
+
 
 module.exports = {
     entry: './public/src/main.js',
@@ -45,7 +47,7 @@ module.exports = {
         new ExtractTextPlugin("styles.css"),
         new webpack.optimize.UglifyJsPlugin(),
         new OptimizeCssAssetsPlugin({
-            cssProcessor: require('cssnano'),
+            cssProcessor: cssnano,
             cssProcessorOptions: { discardComments: {removeAll: true } },
             canPrint: true
         })

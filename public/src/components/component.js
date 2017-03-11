@@ -1,3 +1,8 @@
+import toastr from 'toastr';
+import settings from '../assets/settings';
+
+import 'toastr/build/toastr.css';
+
 /**
  * Basic class for Components on the webpage. This class will be extended by other components.
  */
@@ -10,10 +15,13 @@ class Component
      */
     constructor(props={}, state={})
     {
-        this.props = this._set(props);
-        this._setState(state);
+        this.settings = settings;
+        this.props = _set(props);
 
-        this.mount();
+        this.message = toastr;
+        this.message.options = this.settings.message;
+
+        this._setState(state);
     }
 
     mount()
@@ -42,23 +50,28 @@ class Component
         cases[renderType](compiled);
     }
 
-    _setState(stateProvider)
+    _setState(stateProvider, reRender=true)
     {
         const updatedState = typeof stateProvider === 'function'
             ? stateProvider(this.state) : stateProvider;
 
-        this.state = this._set(updatedState);
-        this.render();
-    }
+        this.state = _set(updatedState, this.state);
 
-    _set(values, target={})
-    {
-        Object.keys(values).forEach(function(key) {
-            target[key] = values[key];
-        });
+        if (reRender) {
+            this.render();
+        }
 
-        return target;
+        this.mount();
     }
+}
+
+function _set(values, target={})
+{
+    Object.keys(values).forEach(function(key) {
+        target[key] = values[key];
+    });
+
+    return target;
 }
 
 export default Component;

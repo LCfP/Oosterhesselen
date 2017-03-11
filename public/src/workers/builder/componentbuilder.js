@@ -16,20 +16,17 @@ class ComponentBuilder extends Worker
         this._buildBranch(this.structure);
     }
 
-    _buildBranch(branch)
-    {
-        if (branch.hasOwnProperty("here")) {
-            new branch.here.class(branch.here.props);
-        } else {
-            // loop over items in branch
-            Object.keys(branch).forEach(key => {
-                this._buildBranch(branch[key]);
-            });
-        }
-
-        if (branch.hasOwnProperty("lower")) {
-            this._buildBranch(branch.lower)
-        }
+    _buildBranch(branch) {
+        Object.keys(branch).forEach(key => {
+            switch (key) {
+                case 'here':
+                    new branch.here.class(branch.here.props);
+                    break;
+                case 'lower':
+                default:
+                    this._buildBranch(branch[key]);
+            }
+        });
     }
 }
 

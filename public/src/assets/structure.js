@@ -1,5 +1,6 @@
 import Topbar from '../../src/components/nav/topbar';
 import Body from '../../src/components/body/body';
+import Footer from '../../src/components/body/footer';
 import Table from '../../src/components/table/table';
 import About from '../../src/components/body/side/about';
 
@@ -39,6 +40,14 @@ const structure = {
             table: {
                 here: {
                     class: Table,
+                    props: {
+                        anchor: "#table"
+                    }
+                }
+            },
+            footer: {
+                here: {
+                    class: Footer,
                     props: {
                         options: {
                             renderType: "append"
