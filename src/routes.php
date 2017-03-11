@@ -1,5 +1,7 @@
 <?php
 
+$app->get('/', \App\Controllers\HomeController::class);
+
 $app->group('/person', function ()
 {
     // retrieves full data for a person with ID {id}.
