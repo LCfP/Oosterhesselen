@@ -21,8 +21,17 @@ class About extends Component
      */
     mount()
     {
-        $("li[data-open='about-side-menu']").click((e) => {
-            console.log("Clicked!");
+        const $handler = $("#about");
+        const $wrapper = $("#table");
+
+        $("li[data-open='about-side-menu']").click(e => {
+            $handler.width(480);
+            $wrapper.css({opacity: .3});
+        });
+
+        $wrapper.click(function () {
+            $handler.width(0);
+            $wrapper.css({opacity: 1});
         });
     }
 }
