@@ -1,5 +1,6 @@
 import Component from '../component';
 import Template from "../../../templates/body/table/table.hbs";
+
 import "../../styles/table.css";
 
 
@@ -23,14 +24,11 @@ class Table extends Component
      */
     mount()
     {
+        // selection pagination (no. items to get per additional load)
         $("#pagination_select").change(e => {
             const select = $("#pagination_select option:selected").text();
-
             this._setState(prevState => {
-                this.message.success(`Gelukt! We halen nu ${select} personen per keer op!`);
-
                 return {
-                    headers: [],
                     rows: [],
                     pagination: {
                         page: 0,
@@ -44,13 +42,32 @@ class Table extends Component
                 }
             }, false);
 
+            this.message.success(`Gelukt! We halen nu ${select} personen per keer op!`);
             this._getPersons();
         });
 
-        $("#load-more").click(e => {
-            this.message.info("Bezig meer personen op te halen!");
+        // obtains more items (actual toggle, button)
+        $("#load-more").click(e => this._getPersons());
+
+        // filters for the data presentation
+        $("input[data-input='header-filter']").change(e => {
+            const $handler = $(e.target);
+            const value = $(e.target).val();
+
+            this._setState(prevState => {
+                prevState.filters[$handler.attr('name')] = value;
+                prevState.pagination.page = 0;
+
+                return {
+                    rows: [],
+                    filters: prevState.filters,
+                    pagination: prevState.pagination
+                }
+            });
+
+            this.message.info("De nieuwe filters zijn ingesteld!");
             this._getPersons();
-        })
+        });
     }
 
     /**
@@ -61,23 +78,29 @@ class Table extends Component
         const selection = this.state.pagination.options.filter(item => item.selected).shift();
         const page = this.state.pagination.page;
 
-        $.getJSON(`./person/${page}/${selection.value}`).done(data => {
-            this._setState(prevState => {
-                const pagination = prevState.pagination;
+        this._setState({loading: true});
 
-                pagination.page = page + 1;
-                pagination.hasNextPage = !!data.next_page_url;
+        $.post(
+            `./person/${page}/${selection.value}`,
+            {filters: this.state.filters},
+            data => {
+                this._setState(prevState => {
+                    const pagination = prevState.pagination;
 
-                // filter to only include the columns we want to show.
-                data.data = _filterColumns(data.data, this.state.columns.show);
+                    pagination.page = page + 1;
+                    pagination.hasNextPage = !!data.next_page_url;
 
-                return {
-                    headers: Object.keys(data.data[0]),
-                    rows: (prevState.rows || []).concat(data.data),
-                    pagination: pagination
-                }
-            })
-        });
+                    // filter to only include the columns we want to show.
+                    data.data = _filterColumns(data.data, this.state.columns.show);
+
+                    return {
+                        rows: (prevState.rows || []).concat(data.data),
+                        pagination: pagination,
+                        loading: false
+                    }
+                });
+            }
+        );
     }
 }
 

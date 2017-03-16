@@ -3,10 +3,22 @@
 }
 
 .table-wrapper {
-    max-height: 66vh;
-    overflow: auto;
+    max-height: 68vh;
 }
 
 .normalize-overflow {
-    padding-right: 17px;
+    overflow: auto;
+}
+
+.table .thead-default tr th {
+    background-color: #eceeef;
+    border-bottom: 2px solid #eceeef;
+}
+
+.input-group .form-control:last-child {
+    border-radius: 4px;
+}
+
+.no-padding {
+    padding: 0;
 }

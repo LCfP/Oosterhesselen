@@ -1,0 +1,25 @@
+/*
+    Sidebar
+ */
+.sidebar {
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background: white;
+    width: 0;
+}
+
+.sidebar-right {
+    right: 0;
+    border-left: 1px solid #ccc;
+}
+
+/*
+    Inner part
+ */
+#about .about-content {
+    padding: 10px;
+}

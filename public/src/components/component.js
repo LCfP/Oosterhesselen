@@ -46,7 +46,6 @@ class Component
             "replace": $anchor.html.bind($anchor)
         };
 
-        //$anchor.html(compiled);
         cases[renderType](compiled);
     }
 

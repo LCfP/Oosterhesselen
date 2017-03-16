@@ -5,11 +5,11 @@ const settings = {
             options: [
                 {
                     value: 25,
-                    selected: true
+                    selected: false
                 },
                 {
                     value: 50,
-                    selected: false
+                    selected: true
                 },
                 {
                     value: 100,
@@ -36,7 +36,8 @@ const settings = {
                 "Overlijden plaats",
                 "Burgerlijke staat"
             ]
-        }
+        },
+        filters: {}
     },
     message: {
         closeButton: false,
