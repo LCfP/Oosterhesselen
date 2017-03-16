@@ -36,13 +36,24 @@ class PersonController
     {
         $this->logger->info("'/person/{$args['pagination']}/{$args['amount']}' | ");
 
-        $persons = $this->table->simplePaginate(
+        $filters = $request->getParam('filters');
+        $persons = $this->table;
+
+        if ($filters) {
+            $persons = $persons->where(function($query) use ($filters) {
+                foreach ($filters as $column => $value) {
+                    if ($value) {
+                        $query->where($column, 'LIKE', "%$value%");
+                    }
+                }
+            });
+        }
+
+        return $response->withJson($persons->simplePaginate(
             (int) $args['amount'],
             ['*'],
             'page',
             (int) $args['pagination']
-        );
-
-        return $response->withJson($persons ?: "");
+        ) ?: "");
     }
 }

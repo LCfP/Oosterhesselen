@@ -22,7 +22,7 @@
             <table class="table table-responsive margin-bottom-zero">
                 <thead class="thead-default">
                     <tr>
-                        {{#each headers as |value index|}}
+                        {{#each columns.show as |value index|}}
                             <th class="col-sm-1">
                                 <div class="input-group">
                                     <label class="sr-only" for="input_{{index}}">
@@ -33,7 +33,8 @@
                                            name="{{value}}"
                                            class="form-control"
                                            data-input="header-filter"
-                                           placeholder="{{value}}"/>
+                                           placeholder="{{value}}"
+                                           value="{{lookup ../filters value}}"/>
                                 </div>
                             </th>
                         {{/each}}
@@ -51,25 +52,38 @@
         <div class="normalize-overflow table-wrapper">
             <table class="table table-responsive" id="person-table">
                 <tbody>
-                    {{#each rows as |child index|}}
+                    {{#if loading}}
                         <tr>
-                            {{#each child as |value key|}}
-                                <td class="col-sm-1">{{value}}</td>
-                            {{/each}}
-                        </tr>
-                    {{/each}}
-                </tbody>
-                {{#if pagination.hasNextPage}}
-                    <tfoot>
-                        <tr>
-                            <td colspan="{{headers.length}}" class="text-center">
-                                <button class="btn btn-default" id="load-more">
-                                    <i class="glyphicon glyphicon-refresh"></i>
-                                    Laad meer
-                                </button>
+                            <td colspan="{{columns.show.length}}">
+                                <img src="../../../img/loading.gif"
+                                     class="img-responsive center-block"
+                                     title="Loading"
+                                     alt="Loading"/>
                             </td>
                         </tr>
-                    </tfoot>
+                    {{else}}
+                        {{#each rows as |child index|}}
+                            <tr>
+                                {{#each child as |value key|}}
+                                    <td class="col-sm-1">{{value}}</td>
+                                {{/each}}
+                            </tr>
+                        {{/each}}
+                    {{/if}}
+                </tbody>
+                {{#if pagination.hasNextPage}}
+                    {{#unless loading}}
+                        <tfoot>
+                            <tr>
+                                <td colspan="{{columns.show.length}}" class="text-center">
+                                    <button class="btn btn-default" id="load-more">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                        Laad meer
+                                    </button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    {{/unless}}
                 {{/if}}
             </table>
         </div>

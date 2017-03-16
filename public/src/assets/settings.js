@@ -5,11 +5,11 @@ const settings = {
             options: [
                 {
                     value: 25,
-                    selected: true
+                    selected: false
                 },
                 {
                     value: 50,
-                    selected: false
+                    selected: true
                 },
                 {
                     value: 100,
