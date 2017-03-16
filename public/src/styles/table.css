@@ -9,3 +9,12 @@
 .normalize-overflow {
     overflow: auto;
 }
+
+.table .thead-default tr th {
+    background-color: #eceeef;
+    border-bottom: 2px solid #eceeef;
+}
+
+.no-padding {
+    padding: 0;
+}

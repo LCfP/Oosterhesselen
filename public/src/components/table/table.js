@@ -24,6 +24,7 @@ class Table extends Component
      */
     mount()
     {
+        // selection pagination (no. items to get per additional load)
         $("#pagination_select").change(e => {
             const select = $("#pagination_select option:selected").text();
 
@@ -48,10 +49,25 @@ class Table extends Component
             this._getPersons();
         });
 
+        // obtains more items (actual toggle, button)
         $("#load-more").click(e => {
             this.message.info("Bezig meer personen op te halen!");
             this._getPersons();
-        })
+        });
+
+        // filters for the data presentation
+        $("input[data-input='header-filter']").change(e => {
+            const $handler = $(e.target);
+            const value = $(e.target).val();
+
+            this._setState(prevState => {
+                prevState.filters[$handler.attr('name')] = value;
+
+                return {
+                    filters: prevState.filters
+                }
+            })
+        });
     }
 
     /**

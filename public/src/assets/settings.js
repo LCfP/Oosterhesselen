@@ -36,7 +36,8 @@ const settings = {
                 "Overlijden plaats",
                 "Burgerlijke staat"
             ]
-        }
+        },
+        filters: {}
     },
     message: {
         closeButton: false,

@@ -17,13 +17,25 @@
             </select>
         </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body no-padding">
         <div class="normalize-overflow">
             <table class="table table-responsive margin-bottom-zero">
-                <thead>
+                <thead class="thead-default">
                     <tr>
                         {{#each headers as |value index|}}
-                            <th class="col-sm-1">{{value}}</th>
+                            <th class="col-sm-1">
+                                <div class="input-group">
+                                    <label class="sr-only" for="input_{{index}}">
+                                        Filter voor {{value}}.
+                                    </label>
+                                    <input id="input_{{index}}"
+                                           type="text"
+                                           name="{{value}}"
+                                           class="form-control"
+                                           data-input="header-filter"
+                                           placeholder="{{value}}"/>
+                                </div>
+                            </th>
                         {{/each}}
                         <th style="width: 17px;">
                             {{!--
