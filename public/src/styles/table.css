@@ -3,10 +3,9 @@
 }
 
 .table-wrapper {
-    max-height: 66vh;
-    overflow: auto;
+    max-height: 68vh;
 }
 
 .normalize-overflow {
-    padding-right: 17px;
+    overflow: auto;
 }

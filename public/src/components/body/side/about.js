@@ -22,10 +22,10 @@ class About extends Component
     mount()
     {
         const $handler = $("#about");
-        const $wrapper = $("#table");
+        const $wrapper = $("#container");
 
         $("li[data-open='about-side-menu']").click(e => {
-            $handler.width(480);
+            $handler.width(this.props.width);
             $wrapper.css({opacity: .3});
         });
 

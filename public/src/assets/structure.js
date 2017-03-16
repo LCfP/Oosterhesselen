@@ -33,7 +33,8 @@ const structure = {
                         options: {
                             renderType: "append"
                         },
-                        anchor: "#container"
+                        anchor: "#document",
+                        width: 400
                     }
                 }
             },

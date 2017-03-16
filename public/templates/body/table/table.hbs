@@ -18,22 +18,31 @@
         </div>
     </div>
     <div class="panel-body">
-        <table class="table table-responsive margin-bottom-zero">
-            <thead class="normalize-overflow">
-                <tr>
-                    {{#each headers as |value index|}}
-                        <th>{{value}}</th>
-                    {{/each}}
-                </tr>
-            </thead>
-        </table>
-        <div class="table-wrapper">
+        <div class="normalize-overflow">
+            <table class="table table-responsive margin-bottom-zero">
+                <thead>
+                    <tr>
+                        {{#each headers as |value index|}}
+                            <th class="col-sm-1">{{value}}</th>
+                        {{/each}}
+                        <th style="width: 17px;">
+                            {{!--
+                                This is pretty dumb, but we need this to be here since the scroll bar
+                                takes about 17px in the tbody. CSS2+ removed styling on <tr> elements,
+                                so we cannot do this on the table row itself.
+                            --}}
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="normalize-overflow table-wrapper">
             <table class="table table-responsive" id="person-table">
                 <tbody>
                     {{#each rows as |child index|}}
                         <tr>
                             {{#each child as |value key|}}
-                                <td>{{value}}</td>
+                                <td class="col-sm-1">{{value}}</td>
                             {{/each}}
                         </tr>
                     {{/each}}
