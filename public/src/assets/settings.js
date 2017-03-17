@@ -1,7 +1,7 @@
 const settings = {
     table: {
         pagination: {
-            page: 0,
+            page: 1,
             options: [
                 {
                     value: 25,
