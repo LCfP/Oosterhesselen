@@ -59,7 +59,13 @@
                     {{#each rows as |child index|}}
                         <tr>
                             {{#each child as |value key|}}
-                                <td class="col-sm-1">{{value}}</td>
+                                <td class="col-sm-1">
+                                    {{#eq key "ID-nr"}}
+                                        <a class="data-overlay">{{value}}</a>
+                                    {{else}}
+                                        {{value}}
+                                    {{/eq}}
+                                </td>
                             {{/each}}
                         </tr>
                     {{/each}}
@@ -87,5 +93,6 @@
                 </tfoot>
             </table>
         </div>
+        <div id="people-overlay-container">{{!-- Filled by the modal --}}</div>
     </div>
 </div>

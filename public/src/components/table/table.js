@@ -1,4 +1,6 @@
 import Component from '../component';
+import Overlay from './overlay';
+
 import Template from "../../../templates/body/table/table.hbs";
 
 import "../../styles/table.css";
@@ -99,6 +101,9 @@ class Table extends Component
                         loading: false
                     }
                 });
+
+                // update overlay
+                new Overlay({anchor: "#people-overlay-container"});
             }
         );
     }

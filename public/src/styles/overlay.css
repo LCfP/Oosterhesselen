@@ -1,0 +1,12 @@
+.data-overlay {
+    cursor: pointer;
+}
+
+.source-material {
+    margin-right: 50px;
+}
+
+.born-deceased {
+    color: #777;
+    font-size: large;
+}
