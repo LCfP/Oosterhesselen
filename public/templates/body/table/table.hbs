@@ -60,11 +60,11 @@
                         <tr>
                             {{#each child as |value key|}}
                                 <td class="col-sm-1">
-                                    {{#eq key "ID-nr"}}
+                                    {{#isID key}}
                                         <a class="data-overlay">{{value}}</a>
                                     {{else}}
                                         {{value}}
-                                    {{/eq}}
+                                    {{/isID}}
                                 </td>
                             {{/each}}
                         </tr>

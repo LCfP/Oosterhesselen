@@ -1,8 +1,9 @@
+import settings from './settings';
 import Handlebars from 'handlebars-template-loader/runtime';
 
-Handlebars.registerHelper('eq', function (candidate, comparator, options) {
+Handlebars.registerHelper('isID', function (candidate, options) {
     "use strict";
-    if (candidate == comparator) {
+    if (settings.table.columns.isID.indexOf(candidate) > -1) {
         return options.fn(this);
     }
 

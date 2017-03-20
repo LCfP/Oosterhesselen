@@ -22,6 +22,11 @@ const settings = {
             ]
         },
         columns: {
+            isID: [
+                "ID-nr",
+                "Vader",
+                "Moeder"
+            ],
             show: [
                 "ID-nr",
                 "Voornaam",
