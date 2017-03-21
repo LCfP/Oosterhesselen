@@ -15,6 +15,10 @@
                     </option>
                 {{/each}}
             </select>
+            <button class="btn btn-default" id="csv_download">
+                <i class="glyphicon glyphicon-download-alt"></i>
+                Download CSV
+            </button>
         </div>
     </div>
     <div class="panel-body no-padding">
@@ -52,46 +56,43 @@
         <div class="normalize-overflow table-wrapper">
             <table class="table table-responsive" id="person-table">
                 <tbody>
-                    {{#if loading}}
+                    {{#each rows as |child index|}}
                         <tr>
+                            {{#each child as |value key|}}
+                                <td class="col-sm-1">
+                                    {{#isID key}}
+                                        <a class="data-overlay">{{value}}</a>
+                                    {{else}}
+                                        {{value}}
+                                    {{/isID}}
+                                </td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        {{#if loading}}
                             <td colspan="{{columns.show.length}}">
                                 <img src="../../../img/loading.gif"
                                      class="img-responsive center-block"
                                      title="Loading"
                                      alt="Loading"/>
                             </td>
-                        </tr>
-                    {{else}}
-                        {{#each rows as |child index|}}
-                            <tr>
-                                {{#each child as |value key|}}
-                                    <td class="col-sm-1">{{value}}</td>
-                                {{/each}}
-                            </tr>
-                        {{/each}}
-                    {{/if}}
-                </tbody>
-                {{#if pagination.hasNextPage}}
-                    {{#unless loading}}
-                        <tfoot>
-                            <tr>
+                        {{else}}
+                            {{#if pagination.hasNextPage}}
                                 <td colspan="{{columns.show.length}}" class="text-center">
                                     <button class="btn btn-default" id="load-more">
                                         <i class="glyphicon glyphicon-refresh"></i>
                                         Laad meer
                                     </button>
                                 </td>
-                            </tr>
-                        </tfoot>
-                    {{/unless}}
-                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    </tr>
+                </tfoot>
             </table>
         </div>
-    </div>
-    <div class="panel-footer clearfix">
-        <button class="btn btn-default pull-right">
-            <i class="glyphicon glyphicon-download-alt"></i>
-            Download CSV
-        </button>
+        <div id="people-overlay-container">{{!-- Filled by the modal --}}</div>
     </div>
 </div>

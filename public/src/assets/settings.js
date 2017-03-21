@@ -1,7 +1,7 @@
 const settings = {
     table: {
         pagination: {
-            page: 0,
+            page: 1,
             options: [
                 {
                     value: 25,
@@ -22,6 +22,11 @@ const settings = {
             ]
         },
         columns: {
+            isID: [
+                "ID-nr",
+                "Vader",
+                "Moeder"
+            ],
             show: [
                 "ID-nr",
                 "Voornaam",

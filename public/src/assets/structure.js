@@ -1,7 +1,7 @@
 import Topbar from '../../src/components/nav/topbar';
 import Body from '../../src/components/body/body';
 import Footer from '../../src/components/body/footer';
-import Table from '../../src/components/table/table';
+import Table from '../components/table/table';
 import About from '../../src/components/body/side/about';
 
 
@@ -34,7 +34,7 @@ const structure = {
                             renderType: "append"
                         },
                         anchor: "#document",
-                        width: 400
+                        width: 480
                     }
                 }
             },
