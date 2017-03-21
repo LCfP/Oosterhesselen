@@ -1,0 +1,153 @@
+<div class="modal fade" id="people-overlay">
+    {{#with person}}
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close">&times;</button>
+                <h4 class="modal-title">
+                    {{Voornaam}} {{Achternaam}}
+                    {{#if Alias}}({{Alias}}){{/if}}
+                    <small>#{{[ID-nr]}}</small>
+                </h4>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5>Geslacht</h5>
+                    </div>
+                    <div class="col-sm-10 align-text">
+                        {{#eq Geslacht "V"}}
+                            Vrouw
+                        {{else}}
+                            Man
+                        {{/eq}}
+                    </div>
+                </div>
+
+                {{#if showBirth}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Geboren</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            {{[Geboorte datum]}} te {{[Geboorte plaats]}}.
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if showDeath}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Overleden</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            {{[Overlijden datum]}} te {{[Overlijden plaats]}}.
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if Beroep}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Beroep</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            {{Beroep}}
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if relations}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Relaties</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            <ol>
+                                {{#each relations as |relation|}}
+                                    <li>
+                                        <div class="margin-bottom-10">
+                                            Gehuwd met
+                                            <a class="data-overlay">
+                                                {{~#eq ../Geslacht "V"~}}
+                                                    {{relation.Man}}
+                                                {{~else~}}
+                                                    {{relation.Vrouw}}
+                                                {{~/eq~}}
+                                            </a>,
+                                            {{#if relation.[Huwelijks Datum]~}}
+                                                op {{relation.[Huwelijks Datum]}}
+                                            {{~/if~}}
+
+                                            {{#if relation.[Huwelijks plaats]~}}
+                                                te {{relation.[Huwelijks plaats]}}
+                                            {{~/if~}}.
+                                        </div>
+
+                                        {{#if relation.[Relatie info]}}
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    Overige informatie
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p>
+                                                        {{relation.[Relatie info]}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        {{/if}}
+
+                                        {{#if relation.[Huwelijks bron]}}
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    Bron
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p>
+                                                        {{relation.[Huwelijks bron]}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        {{/if}}
+                                    </li>
+                                {{/each}}
+                            </ol>
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{!-- Notes are misc. data, so we show it here only if it actually exists --}}
+                {{#if Aantekening}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Aantekening</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            {{Aantekening}}
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if showSourcing}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Bronnen</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            {{#if [Doop bron]}}
+                                Doop bron: {{[Doop bron]}};
+                            {{/if}}
+                            {{#if [Geboorte bron]}}
+                                Geboorte bron: {{[Geboorte bron]}};
+                            {{/if}}
+                            {{#if [Overlijden bron]}}
+                                Overlijden bron: {{[Overlijden bron]}};
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{/with}}
+</div>

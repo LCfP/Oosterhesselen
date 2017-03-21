@@ -1,9 +1,19 @@
+#table .panel-default {
+    border-color: #337ab7;
+
+    /*
+       This is where the scroll bar intersects the panel,
+       so no round edges there,
+    */
+    border-bottom-right-radius: 0;
+}
+
 .margin-bottom-zero {
     margin-bottom: 0;
 }
 
 .table-wrapper {
-    max-height: 68vh;
+    max-height: 72vh;
 }
 
 .normalize-overflow {

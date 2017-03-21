@@ -1,4 +1,6 @@
 import Component from '../component';
+import Overlay from './overlay';
+
 import Template from "../../../templates/body/table/table.hbs";
 
 import "../../styles/table.css";
@@ -26,16 +28,16 @@ class Table extends Component
     {
         // selection pagination (no. items to get per additional load)
         $("#pagination_select").change(e => {
-            const select = $("#pagination_select option:selected").text();
+            const select = parseInt($("#pagination_select option:selected").text());
             this._setState(prevState => {
                 return {
                     rows: [],
                     pagination: {
-                        page: 0,
+                        page: 1,
                         options: prevState.pagination.options.map(option => {
                             return {
                                 value: option.value,
-                                selected: parseInt(select) == option.value
+                                selected: select == option.value
                             }
                         })
                     }
@@ -56,7 +58,7 @@ class Table extends Component
 
             this._setState(prevState => {
                 prevState.filters[$handler.attr('name')] = value;
-                prevState.pagination.page = 0;
+                prevState.pagination.page = 1;
 
                 return {
                     rows: [],
@@ -99,6 +101,9 @@ class Table extends Component
                         loading: false
                     }
                 });
+
+                // update overlay
+                new Overlay({anchor: "#people-overlay-container"});
             }
         );
     }

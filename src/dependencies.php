@@ -41,3 +41,11 @@ $container[\App\Controllers\PersonController::class] = function ($c) {
 
     return new \App\Controllers\PersonController($logger, $table);
 };
+
+// This inits the RelationController, to be exposed via '/relations/<options>' in routes.php
+$container[\App\Controllers\RelationController::class] = function ($c) {
+    $logger = $c->get('logger');
+    $table = $c->get('db')->table('relaties');
+
+    return new \App\Controllers\RelationController($logger, $table);
+};

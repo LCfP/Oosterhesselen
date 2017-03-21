@@ -24,9 +24,24 @@ class Component
         this._setState(state);
     }
 
+    /**
+     * Registers events for this Component (interactions with the rendered template).
+     */
     mount()
     {
-        // registers events etc. (to be overridden)
+        // to be overridden
+    }
+
+    /**
+     * Prepares the state for rendering (mostly inserts logic for the templates only)
+     *
+     * @param {Object} state - The current rendering state (`this.state`)
+     * @returns {Object} - Prepared state
+     */
+    preRender(state)
+    {
+        // to be overridden
+        return state;
     }
 
     render()
@@ -37,9 +52,12 @@ class Component
 
         const renderType = this.props.options && this.props.options.renderType
             ? this.props.options.renderType : "replace";
-        const compiled = this.props.template(this.state);
-        const $anchor = $(this.props.anchor);
 
+        const compiled = this.props.template(
+            this.preRender(this.state)
+        );
+
+        const $anchor = $(this.props.anchor);
         const cases = {
             "append": $anchor.append.bind($anchor),
             "prepend": $anchor.prepend.bind($anchor),
