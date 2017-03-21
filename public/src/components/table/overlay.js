@@ -24,6 +24,9 @@ class Overlay extends Component
         // opens the overlay
         $("a.data-overlay").click(e => {
             if (!this.state.isLoading) {
+                // background remains when clicking new links in overlay -> annoying.
+                $("div.modal-backdrop.fade.in").remove();
+
                 this._getPerson(e.target.text)
             }
         });
@@ -34,30 +37,68 @@ class Overlay extends Component
         });
     }
 
+    /**
+     * @override
+     */
+    preRender(state)
+    {
+        if (state.person) {
+            // If there is source material, we display the source annotation
+            if (state.person["Doop bron"]
+                || state.person["Geboorte bron"]
+                || state.person["Overlijden bron"]) {
+                state.person.showSourcing = true;
+            }
+
+            // If we have a DoB..
+            if (state.person["Geboorte datum"]) {
+                state.person.showBirth = true;
+            }
+
+            // ..or DoD, we display that information
+            if (state.person["Overlijden datum"]) {
+                state.person.showDeath = true;
+            }
+
+            if (state.person.relations) {
+                // sorts by marriage number (first marriage, second, third etc..)
+                state.person.relations = state.person.relations.sort((a, b) => {
+                    const cases = {"M": "Huwman nr", "V": "Huwvrouw nr"};
+                    const key = cases[state.person["Geslacht"]];
+
+                    return parseInt(a[key]) - parseInt(b[key]);
+                })
+            }
+        }
+
+        return state;
+    }
+
     _getPerson(id)
     {
+        const ajaxCall = (url) => $.ajax({url: url});
+
         this._setState({isLoading: true});
 
-        $.get({
-            url: `./person/${id}`,
-            success: res => {
-                const data = res.shift();
+        $.when(
+            ajaxCall(`./person/${id}`),
+            ajaxCall(`./relations/${id}`)
+        ).done((data_person, relations) => {
+            // Eloquent outputs an array of results (so first entry of
+            // result array, and then first result of thát.
+            const person = data_person[0][0];
 
-                if (data["Doop bron"] || data["Geboorte bron"] || data["Overlijden bron"]) {
-                    data.showSourcing = true;
-                }
-
-                if (data["Geboorte datum"] || data["Overlijden datum"]) {
-                    data.showLifetime = true;
-                }
-
-                this._setState({
-                    person: data,
-                    isLoading: false
-                });
-
-                $("#people-overlay").modal('show');
+            if (relations) {
+                // first array entry is result of call.
+                person.relations = relations[0];
             }
+
+            this._setState({
+                person: person,
+                isLoading: false
+            });
+
+            $("#people-overlay").modal('show');
         });
     }
 }
