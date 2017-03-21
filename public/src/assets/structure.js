@@ -34,7 +34,7 @@ const structure = {
                             renderType: "append"
                         },
                         anchor: "#document",
-                        width: 400
+                        width: 480
                     }
                 }
             },
