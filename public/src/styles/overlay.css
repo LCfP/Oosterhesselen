@@ -2,11 +2,11 @@
     cursor: pointer;
 }
 
-.source-material {
-    margin-right: 50px;
-}
-
 .born-deceased {
     color: #777;
     font-size: large;
+}
+
+.align-text {
+    margin: 10px 0;
 }

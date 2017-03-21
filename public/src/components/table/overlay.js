@@ -40,9 +40,19 @@ class Overlay extends Component
 
         $.get({
             url: `./person/${id}`,
-            success: data => {
+            success: res => {
+                const data = res.shift();
+
+                if (data["Doop bron"] || data["Geboorte bron"] || data["Overlijden bron"]) {
+                    data.showSourcing = true;
+                }
+
+                if (data["Geboorte datum"] || data["Overlijden datum"]) {
+                    data.showLifetime = true;
+                }
+
                 this._setState({
-                    person: data.shift(),
+                    person: data,
                     isLoading: false
                 });
 
