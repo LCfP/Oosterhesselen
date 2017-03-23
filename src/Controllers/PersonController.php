@@ -56,4 +56,14 @@ class PersonController
             (int) $args['pagination']
         ) ?: "");
     }
+
+    public function getChildren(Request $request, Response $response, $args)
+    {
+        $this->logger->info("'/person/{$args['id']}' | ");
+
+        $children = $this->table->where('Vader', '=', $args['id'])
+            ->orWhere('Moeder', '=', $args['id'])->get();
+
+        return $response->withJson($children ?: "");
+    }
 }
