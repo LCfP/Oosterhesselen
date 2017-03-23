@@ -4,7 +4,10 @@ $app->get('/', \App\Controllers\HomeController::class);
 
 $app->group('/person', function ()
 {
-    // retrieves full data for a person with ID {id}.
+    // retrieves children for person with ID {id}.
+    $this->get('/children/{id}', \App\Controllers\PersonController::class . ':getChildren');
+
+    // retrieves list of persons, indexed to page {pagination}, by amount {amount}.
     $this->post('/{pagination}/{amount}', \App\Controllers\PersonController::class . ':getPersons');
 
     // retrieves full data for a person with ID {id}.
@@ -13,6 +16,6 @@ $app->group('/person', function ()
 
 $app->group('/relations', function ()
 {
-    // retrieves full data for a person with ID {id}.
+    // retrieves full marriage data for a person with ID {id}.
     $this->get('/{id}', \App\Controllers\RelationController::class . ':getRelations');
 });
