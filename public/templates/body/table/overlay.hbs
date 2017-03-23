@@ -116,6 +116,43 @@
                     </div>
                 {{/if}}
 
+                {{#if showParents}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Ouders</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            {{#if Vader}}Vader <a class="data-overlay">{{Vader}}</a>{{/if}},
+                            {{#if Moeder}}moeder <a class="data-overlay">{{Moeder}}</a>{{/if}}.
+                        </div>
+                    </div>
+                {{/if}}
+
+                {{#if children}}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h5>Kinderen</h5>
+                        </div>
+                        <div class="col-sm-10 align-text">
+                            <ol>
+                                {{#each children as |child key|}}
+                                    <li>
+                                        <div class="margin-bottom-10">
+                                            Uit het huwelijk met <a class="data-overlay">
+                                                {{~#eq ../Geslacht "V"~}}{{child.Vader}}{{~else~}}{{child.Moeder}}{{~/eq~}}
+                                            </a>, is
+                                            {{#if child.[Geboorte datum]}}op {{child.[Geboorte datum]}}{{/if}}
+                                            {{child.Voornaam}} {{child.Achternaam}}
+                                            (<a class="data-overlay">{{child.[ID-nr]}}</a>) geboren
+                                            {{#if child.[Geboorte plaats]}}te {{child.[Geboorte plaats]}}{{/if}}.
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ol>
+                        </div>
+                    </div>
+                {{/if}}
+
                 {{!-- Notes are misc. data, so we show it here only if it actually exists --}}
                 {{#if Aantekening}}
                     <div class="row">

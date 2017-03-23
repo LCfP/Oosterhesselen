@@ -50,6 +50,12 @@ class Overlay extends Component
                 state.person.showSourcing = true;
             }
 
+            // If at least one parent is known.
+            if (state.person["Vader"]
+                || state.person["Moeder"]) {
+                state.person.showParents = true;
+            }
+
             // If we have a DoB..
             if (state.person["Geboorte datum"]) {
                 state.person.showBirth = true;
@@ -82,8 +88,9 @@ class Overlay extends Component
 
         $.when(
             ajaxCall(`./person/${id}`),
-            ajaxCall(`./relations/${id}`)
-        ).done((data_person, relations) => {
+            ajaxCall(`./relations/${id}`),
+            ajaxCall(`./person/children/${id}`)
+        ).done((data_person, relations, children) => {
             // Eloquent outputs an array of results (so first entry of
             // result array, and then first result of thát.
             const person = data_person[0][0];
@@ -91,6 +98,11 @@ class Overlay extends Component
             if (relations) {
                 // first array entry is result of call.
                 person.relations = relations[0];
+            }
+
+            if (children) {
+                // first array entry is result of call.
+                person.children = children[0];
             }
 
             this._setState({
