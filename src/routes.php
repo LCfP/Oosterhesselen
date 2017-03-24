@@ -14,7 +14,7 @@ $app->group('/person', function ()
     $this->get('/{id}', \App\Controllers\PersonController::class . ':getPerson');
 });
 
-$app->group('/relations', function ()
+$app->group('/relation', function ()
 {
     // retrieves full marriage data for a person with ID {id}.
     $this->get('/{id}', \App\Controllers\RelationController::class . ':getRelations');
