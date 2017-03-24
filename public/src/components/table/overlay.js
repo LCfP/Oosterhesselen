@@ -88,7 +88,7 @@ class Overlay extends Component
 
         $.when(
             ajaxCall(`./person/${id}`),
-            ajaxCall(`./relations/${id}`),
+            ajaxCall(`./relation/${id}`),
             ajaxCall(`./person/children/${id}`)
         ).done((data_person, relations, children) => {
             // Eloquent outputs an array of results (so first entry of
